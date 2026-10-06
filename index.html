@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Жабир кыздар медресеси</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="logo">🕌 ЖАБИР</div>
+    <h1>Кыздар медресеси</h1>
+    <p>Сабактарды башкаруу системасы</p>
+</header>
+
+<nav class="menu">
+    <button onclick="showPage('schedule')">📅 Расписание</button>
+    <button onclick="showPage('teachers')">👩🏻‍🏫 Устазалар</button>
+    <button onclick="showPage('replace')">🔄 Алмаштыруу</button>
+    <button onclick="showPage('messages')">🔔 Билдирүүлөр</button>
+    <button onclick="showPage('report')">📊 Айлык отчет</button>
+</nav>
+
+<main>
+
+<!-- ================= РАСПИСАНИЕ ================= -->
+
+<section id="schedule" class="page active">
+
+    <h2 class="title">📅 Жумалык расписание</h2>
+
+    <div class="time-box">
+        <h3>⏰ Сабактардын убактысы</h3>
+
+        <p>1-сабак: <b>08:30 – 09:15</b></p>
+        <p>2-сабак: <b>09:20 – 10:05</b></p>
+        <p>3-сабак: <b>10:10 – 10:55</b></p>
+        <p>4-сабак: <b>11:10 – 11:45</b></p>
+        <p>5-сабак: <b>12:00 – 12:45</b></p>
+        <p>6-сабак: <b>13:45 – 14:30</b></p>
+        <p>7-сабак: <b>14:35 – 15:20</b></p>
+        <p>8-сабак: <b>15:25 – 16:10</b></p>
+    </div>
+
+    <div id="scheduleContainer"></div>
+
+</section>
+
+
+<!-- ================= УСТАЗАЛАР ================= -->
+
+<section id="teachers" class="page">
+
+    <h2 class="title">👩🏻‍🏫 Устазалар</h2>
+
+    <div class="teachers">
+
+        <div class="teacher">
+            <h3>Зухра Вахидова</h3>
+            <p>👑 Мүдүр</p>
+        </div>
+
+        <div class="teacher">
+            <h3>Жанылай устаза</h3>
+            <p>Арап тили, Фикх</p>
+        </div>
+
+        <div class="teacher">
+            <h3>Толгонай устаза</h3>
+            <p>Куран</p>
+        </div>
+
+        <div class="teacher">
+            <h3>Феруза устаза</h3>
+            <p>Тажвид, Сиро, Кыргызстан тарыхы</p>
+        </div>
+
+        <div class="teacher">
+            <h3>Лайли устаза</h3>
+            <p>Адеп-ахлак, Хусну-л-хат</p>
+        </div>
+
+        <div class="teacher">
+            <h3>Абдумалик устаз</h3>
+            <p>Акыйда, Усул-ул-фыкх</p>
+        </div>
+
+        <div class="teacher">
+            <h3>Назира устаза</h3>
+            <p>Хадис</p>
+        </div>
+
+        <div class="teacher">
+            <h3>Жасмина устаза</h3>
+            <p>Сарф</p>
+        </div>
+
+        <div class="teacher">
+            <h3>Зухра устаза</h3>
+            <p>Информатика</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= АЛМАШТЫРУУ ================= -->
+
+<section id="replace" class="page">
+
+    <h2 class="title">🔄 Сабакты алмаштыруу</h2>
+
+    <div class="card">
+
+        <h3>Сабакка келе албай калдыңызбы?</h3>
+
+        <label>Устаза</label>
+
+        <select id="absentTeacher">
+            <option>Жанылай устаза</option>
+            <option>Толгонай устаза</option>
+            <option>Феруза устаза</option>
+            <option>Лайли устаза</option>
+            <option>Абдумалик устаз</option>
+            <option>Назира устаза</option>
+            <option>Жасмина устаза</option>
+            <option>Зухра Вахидова</option>
+            <option>Зухра устаза</option>
+        </select>
+
+        <label>Күн</label>
+        <input type="date" id="replaceDate">
+
+        <label>Сабак</label>
+        <input
+            type="text"
+            id="replaceLesson"
+            placeholder="Мисалы: Фикх">
+
+        <label>Себеби</label>
+
+        <textarea
+            id="reason"
+            placeholder="Келе албай калуу себебин жазыңыз">
+        </textarea>
+
+        <button class="main-btn" onclick="sendRequest()">
+            📩 Билдирүү жөнөтүү
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= БИЛДИРҮҮЛӨР ================= -->
+
+<section id="messages" class="page">
+
+    <h2 class="title">🔔 Устазалардын билдирүүлөрү</h2>
+
+    <div id="requests"></div>
+
+</section>
+
+
+<!-- ================= ОТЧЕТ ================= -->
+
+<section id="report" class="page">
+
+    <h2 class="title">📊 Айлык отчет</h2>
+
+    <div class="salary-rule">
+
+        <h3>⚠️ Айлык эсептөөнүн эрежеси</h3>
+
+        <p>
+            Ким кимдин ордуна сабак өтсө да,
+            ордуна өткөн сабак үчүн айлык көбөйтүлбөйт.
+        </p>
+
+        <p>
+            Негизги устазанын айлыгы да кыскартылбайт.
+        </p>
+
+        <p>
+            Алмаштыруу болгону отчетто гана көрсөтүлөт.
+        </p>
+
+    </div>
+
+    <div class="table-wrapper">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Устаза</th>
+                    <th>Негизги сабактары</th>
+                    <th>Өткөн сабак</th>
+                    <th>Ордуна өткөн</th>
+                    <th>Айлык</th>
+                </tr>
+            </thead>
+
+            <tbody id="reportTable"></tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+    <h3>🕌 Жабир кыздар медресеси</h3>
+
+    <p>Мүдүр: Зухра Вахидова</p>
+
+    <p>
+        Кара-Суу району, Мады айыл өкмөтү,
+        Пасилке айылы
+    </p>
+
+    <p>© 2026 Жабир кыздар медресеси</p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
